@@ -502,7 +502,7 @@ export class ClassGenerator {
             classDef.getPropertiesAndConstructorParameters().forEach((prop) => {
                 const propName = prop.name.replace('?', '');
                 if (outFile.getClass(prop.type.text) != null) {
-                    codeLines.push(`\tthis.${propName} = (props.${propName}) ? new ${prop.type.text}(props.${propName}): undefined;`);
+                    codeLines.push(`\tthis.${propName} = new ${prop.type.text}(props.${propName})`);
                 } else if (prop.type.text.indexOf('[]')  >= 0) {
                     const arrayType = prop.type.text.replace('[]', '');
                     const expr = (outFile.getClass(arrayType) != null) ? `new ${arrayType}(o)` : 'o';
